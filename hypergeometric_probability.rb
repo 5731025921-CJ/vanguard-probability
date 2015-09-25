@@ -19,6 +19,14 @@ module HypergeometricProbability
 
   def self.calculate(total, total_wanted, pick, pick_wanted, mode="=")
 
+    # Calculate the probability of desired number of wanted objects picked
+
+    # total: total number of objects to choose from
+    # total_wanted: total number of wanted objects
+    # pick: number of objects picked
+    # pick_wanted: desired number of wanted objects picked
+    # mode: "=", "<", ">", "<=", or ">=", for specifying cumulation
+
     probability = Rational(0)
 
     if mode.include? "="
@@ -28,7 +36,7 @@ module HypergeometricProbability
     end
 
     if mode.include? "<"
-      (0..pick_wanted).each do |x|
+      (0..pick_wanted-1).each do |x|
         probability += calculate(total, total_wanted, pick, x)
       end
     end
