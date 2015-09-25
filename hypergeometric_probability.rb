@@ -1,19 +1,20 @@
 module HypergeometricProbability
 
+  def self.factorial(n)
+    # Finding the factorial of n
+    (1..n).reduce(:*) || 1
+  end
+
   def self.p(n, r)
-    permutations = 1
-    (n-r+1..n).each do |x|
-      permutations *= x
-    end
-    permutations
+    # Finding how many permutations are there
+    # when choosing r objects from n objects
+    Rational(factorial(n), factorial(n - r))
   end
 
   def self.c(n, r)
-    combinations = p(n, r)
-    (1..r).each do |x|
-      combinations /= x
-    end
-    combinations
+    # Finding how many combinations are there
+    # when choosing r objects from n objects
+    Rational(p(n, r), factorial(r))
   end
 
   def self.calculate(total, total_wanted, pick, pick_wanted, mode="=")
