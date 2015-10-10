@@ -8,7 +8,7 @@ module HypergeometricProbability
   def self.p(n, r)
     # Finding how many permutations are there
     # when choosing r objects from n objects
-    Rational(factorial(n), factorial(n - r))
+    n < r ? 0 : Rational(factorial(n), factorial(n - r))
   end
 
   def self.c(n, r)
@@ -48,6 +48,23 @@ module HypergeometricProbability
     end
 
     probability
+
+  end
+
+  def self.expected_value(total, total_wanted, pick)
+
+    # Calculate the expected number of desired object picked
+
+    # total: total number of objects to choose from
+    # total_wanted: total number of wanted objects
+    # pick: number of objects picked
+
+    expected = 0
+    (1..pick).each do |p|
+      expected += p*calculate(total, total_wanted, pick, p)
+    end
+
+    expected
 
   end
 
